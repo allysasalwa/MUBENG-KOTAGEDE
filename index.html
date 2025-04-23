@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>MUBENG KOTAGEDE</title>
+
+	<!-- Google Fonts -->
+
+	<link
+		href="https://fonts.googleapis.com/css?family=Poppins:200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap"
+		rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+		crossorigin="anonymous"></script>
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<!-- Nice Select CSS -->
+	<link rel="stylesheet" href="css/nice-select.css">
+	<!-- Font Awesome CSS -->
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<!-- icofont CSS -->
+	<link rel="stylesheet" href="css/icofont.css">
+	<!-- Slicknav -->
+	<link rel="stylesheet" href="css/slicknav.min.css">
+	<!-- Owl Carousel CSS -->
+	<link rel="stylesheet" href="css/owl-carousel.css">
+	<!-- Datepicker CSS -->
+	<link rel="stylesheet" href="css/datepicker.css">
+	<!-- Animate CSS -->
+	<link rel="stylesheet" href="css/animate.min.css">
+	<!-- Magnific Popup CSS -->
+	<link rel="stylesheet" href="css/magnific-popup.css">
+
+	<!-- jquery Min JS -->
+	<script src="js/jquery.min.js"></script>
+	<!-- jquery Migrate JS -->
+	<script src="js/jquery-migrate-3.0.0.js"></script>
+	<!-- jquery Ui JS -->
+	<script src="js/jquery-ui.min.js"></script>
+	<!-- Easing JS -->
+	<script src="js/easing.js"></script>
+	<!-- Color JS -->
+	<script src="js/colors.js"></script>
+	<!-- Popper JS -->
+	<script src="js/popper.min.js"></script>
+	<!-- Bootstrap Datepicker JS -->
+	<script src="js/bootstrap-datepicker.js"></script>
+	<!-- Jquery Nav JS -->
+	<script src="js/jquery.nav.js"></script>
+	<!-- Slicknav JS -->
+	<script src="js/slicknav.min.js"></script>
+	<!-- ScrollUp JS -->
+	<script src="js/jquery.scrollUp.min.js"></script>
+	<!-- Niceselect JS -->
+	<script src="js/niceselect.js"></script>
+	<!-- Tilt Jquery JS -->
+	<script src="js/tilt.jquery.min.js"></script>
+	<!-- Owl Carousel JS -->
+	<script src="js/owl-carousel.js"></script>
+	<!-- counterup JS -->
+	<script src="js/jquery.counterup.min.js"></script>
+	<!-- Steller JS -->
+	<script src="js/steller.js"></script>
+	<!-- Wow JS -->
+	<script src="js/wow.min.js"></script>
+	<!-- Magnific Popup JS -->
+	<script src="js/jquery.magnific-popup.min.js"></script>
+	<!-- Counter Up CDN JS -->
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
+	<!-- Bootstrap JS -->
+	<script src="js/bootstrap.min.js"></script>
+	<!-- Main JS -->
+	<script src="js/main.js"></script>
+
+	<!-- Medipro CSS -->
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="css/responsive.css">
+
+	<!-- Swiper CSS -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+	
+</head>
+
+<style>
+	.swiper {
+      padding: 40px 0;
+    }
+
+    .swiper-slide {
+      display: flex;
+      justify-content: center;
+    }
+
+	.swiper-slide .card{
+		display:flex;
+		flex-direction: column;
+		height: 100%;
+	}
+
+	.swiper-button-prev,
+.swiper-button-next {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: #fdf8f3;
+  border: 1px solid #c2a27e;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  color: #7b5e3d;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  font-size: 18px;
+  color: #7b5e3d;
+}
+
+.swiper-button-prev::after {
+  content: '❮'; /* Panah kiri elegan */
+}
+
+.swiper-button-next::after {
+  content: '❯'; /* Panah kanan elegan */
+}
+
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+  background-color: #f0e6dc;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+
+    .card {
+      width: 100%;
+      max-width: 300px;
+    }
+
+    .card-img{
+      height: 100px;
+      object-fit: cover;
+    }
+
+	.wisata .card-body {
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		height: 30px; /* Atur tinggi tetap */
+	}
+
+	.card-body {
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		height: 75px; /* Atur tinggi tetap */
+	}
+
+	.card-title {
+		font-size: 1.1rem;
+		font-weight: bold;
+		margin-bottom: 0.5rem;
+		height: 50px; /* Atur tinggi agar seragam */
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+</style>
+
+<header>
+
+		<div class="header">
+			<!-- Header Inner -->
+			<div class="header-inner">
+				<div class="container">
+					<div class="inner">
+						<div class="row">
+							<div class="col-lg-3 col-md-3 col-12">
+								<!-- Start Logo -->
+								<div class="logo">
+									<a href="index.html"><img src="img/logo_jaghana2.png" style="width:100%; height: 12vh;" alt="jaghanatour"></a>
+								</div>
+								<!-- End Logo -->
+								<!-- Mobile Nav -->
+								<div class="mobile-nav"></div>
+								<!-- End Mobile Nav -->
+							</div>
+							<div class="col-lg-7 col-md-9 col-12">
+								<!-- Main Menu -->
+								<div class="main-menu">
+									<nav class="navigation">
+										<ul class="nav menu">
+											<li class="active"><a href="index.html">Home</a></li>
+											<li><a href="#">Wisata<i class="icofont-rounded-down"></i></a>
+												<ul class="dropdown">
+													<li><a href="bokong_semar.html">Situs Bokong Semar</a></li>
+													<li><a href="watugilang_watugateng.html">Situs Watugilang & Watugateng</a></li>
+													<li><a href="hastarenggo.html">Makam Hasta Renggo</a></li>
+													<li><a href="benteng_cepuri.html">Benteng Cepuri</a></li>
+													<li><a href="masjid_gede.html">Masjid Besar Mataram Kotagede</a></li>
+													<li><a href="sendang_seliran.html">Sendang Seliran</a></li>
+													<li><a href="pak_darwin.html">Pengrajin Perak Pak Darwin</a></li>
+													<li><a href="two_gates.html">Between Two Gates</a></li>
+													<li><a href="longkang_cafe.html">Longkang Kotagede</a></li>
+												</ul>
+											</li>
+											<li><a href="#">Rute Wisata<i class="icofont-rounded-down"></i></a>
+												<ul class="dropdown">
+													<li><a href="rute_rasa.html">Rute RASA</a></li>
+													<li><a href="rute_sikil.html">Rute SIKIL</a></li>
+													<li><a href="rute_laras.html">Rute LARAS</a></li>
+													<li><a href="rute_ramah.html">Rute RAMAH</a></li>
+												</ul>
+											</li>
+											<li><a href="https://linktr.ee/jaghanatour">Kontak</a></li>
+										</ul>
+									</nav>
+								</div>
+								<!--/ End Main Menu -->
+							</div>
+							<div class="col-lg-2 col-12">
+								<div class="get-quote">
+									<a href="https://www.instagram.com/jaghana.tour?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="btn">Reservasi Tur</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--/ End Header Inner -->
+		</div>
+		<!-- End Header Area -->
+	</header>
+	
+	<body>
+	<!-- banner Area -->
+	<section class="banner">
+		<div class="hero-banner">
+			<!-- Start Single banner -->
+			<div class="single-banner" style="background-image:url('img/bg.png')">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-7">
+							<div class="text">
+								<h1><span>MUBENG KOTAGEDE</span></h1>
+								<h1>by Jaghana Tour</h1>
+								<p>One Step Travel Guide To Yogyakarta</p>
+								<div class="button">
+									<a href="#wisata" class="btn">Discover More</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+	<!-- End Single banner -->
+</div>
+</section>
+<!-- End banner Area -->
+
+	<!-- Start intro Area -->
+	<section class="intro">
+		<div class="container">
+			<div class="intro-inner">
+				<div class="row">
+					<div class="col-lg-12 col-md-12 col-12 ">
+						<!-- single-intro -->
+						<div class="single-intro first">
+							<div class="inner">
+								<div class="icon">
+									<i class="fa fa-ambulance"></i>
+								</div>
+								<div class="single-content">
+									<h4>Tahukah Kamu?</h4>
+									<p>Kotagede, yang terletak di Yogyakarta, adalah bekas ibu kota Kerajaan Mataram Islam pada abad ke-16. Kotagede merupakan daerah budaya dengan banyak peninggalan sejarah yang dapat dilihat dari arsitektur bangunan maupun kehidupan sosial budaya.</p>
+									<p>Selain itu, Kotagede juga terkenal sebagai pusat kerajinan perak. Para wisatawan dapat berkunjung dan melihat secara langsung proses pengolahan perak di sejumlah bengkel yang ada di Kotagede.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+	</section>
+
+	<section class="wisata">
+		<div class="container">
+			<div class="section-title">
+				<h2 class="elegant-title">PLACES TO GO</h2>
+				<p>Beberapa rekomendasi destinasi wisata di Kotagede</p>
+			</div>			 
+			<div class="elegant-underline"></div> 
+		</div>
+		
+		<!--Swiper-->
+		<div class="swiper">
+			<div class="swiper-wrapper">
+				<!--Slide-->
+				<div class="swiper-slide">
+					<div class="card">
+						<a href="bokong_semar.html" class="card" style="text-decoration: none; color: inherit;">
+						<img src="img/IMG_1173.jpg" class="card-img-top">
+						<div class="card-body">
+							<h5 class="card-title">Situs Bokong Semar</h5>
+						</div>
+						</a>
+					</div>
+				</div>
+
+				<!--Slide-->
+				<div class="swiper-slide">
+					<div class="card">
+						<a href="watugilang_watugateng.html" class="card" style="text-decoration: none; color: inherit;">
+						<img src="img/IMG_1170.jpg" class="card-img-top">
+						<div class="card-body">
+							<h5 class="card-title">Situs Watugilang & Watugateng</h5>
+						</div>
+						</a>
+					</div>
+				</div>
+
+				<!--Slide-->
+				<div class="swiper-slide">
+					<div class="card">
+						<a href="hastarenggo.html" class="card" style="text-decoration: none; color: inherit;">
+						<img src="img/IMG_1990.jpg" class="card-img-top">
+						<div class="card-body">
+							<h5 class="card-title">Makam Hastarenggo</h5>
+						</div>
+						</a>
+					</div>
+				</div>
+
+				<!--Slide-->
+				<div class="swiper-slide">
+					<div class="card">
+						<a href="benteng_cepuri.html" class="card" style="text-decoration: none; color: inherit;">
+						<img src="img/IMG_1180.jpg" class="card-img-top">
+						<div class="card-body">
+							<h5 class="card-title">Benteng Cepuri</h5>
+						</div>
+						</a>
+					</div>
+				</div>
+
+				<!--Slide-->
+				<div class="swiper-slide">
+					<div class="card">
+						<a href="masjid_gede.html" class="card" style="text-decoration: none; color: inherit;">
+						<img src="img/IMG_2011.jpg" class="card-img-top">
+						<div class="card-body">
+							<h5 class="card-title">Masjid Besar Mataram Kotagede</h5>
+						</div>
+						</a>
+					</div>
+				</div>
+
+				<!--Slide-->
+				<div class="swiper-slide">
+					<div class="card">
+						<a href="sendang_seliran.html" class="card" style="text-decoration: none; color: inherit;">
+						<img src="img/IMG_1216.jpg" class="card-img-top">
+						<div class="card-body">
+							<h5 class="card-title">Sendang Seliran</h5>
+						</div>
+						</a>
+					</div>
+				</div>
+
+				<!--Slide-->
+				<div class="swiper-slide">
+					<div class="card">
+						<a href="pak_darwin.html" class="card" style="text-decoration: none; color: inherit;">
+						<img src="img/IMG_1199.jpg" class="card-img-top">
+						<div class="card-body">
+							<h5 class="card-title">Pengrajin Perak Pak Darwin</h5>
+						</div>
+						</a>
+					</div>
+				</div>
+
+				<!--Slide-->
+				<div class="swiper-slide">
+					<div class="card">
+						<a href="two_gates.html" class="card" style="text-decoration: none; color: inherit;">
+						<img src="img/IMG_2016.jpg" class="card-img-top">
+						<div class="card-body">
+							<h5 class="card-title">Between Two Gates</h5>
+						</div>
+						</a>
+					</div>
+				</div>
+
+				<!--Slide-->
+				<div class="swiper-slide">
+					<div class="card">
+						<a href="longkang_cafe.html" class="card" style="text-decoration: none; color: inherit;">
+						<img src="img/IMG_2033.jpg" class="card-img-top">
+						<div class="card-body">
+							<h5 class="card-title">Longkang Cafe</h5>
+						</div>
+						</a>
+					</div>
+				</div>
+			</div>
+
+			<!--Navigasi Panah-->
+			<div class="swiper-button-prev"></div>
+			<div class="swiper-button-next"></div>
+		</div>
+	</section>
+
+
+	<section class="rute">
+		<div class="container">
+					<div class="section-title">
+						<h2 class="elegant-title">Take a Look at Our Tours</h2>
+						<p>Rekomendasi rute wisata yang bisa disesuaikan dengan keinginan kamu!</p>
+					</div>
+					<div class="elegant-underline"></div>
+		</div>
+		<!--Swiper-->
+		<div class="swiper">
+			<div class="swiper-wrapper">
+
+				<!--Slide-->
+				<div class="swiper-slide">
+					<div class="card">
+						<a href="rute_rasa.html" class="card" style="text-decoration: none; color: inherit;">
+						<img src="img/RASA.png" class="card-img-top">
+						<div class="card-body">
+							<h5 class="card-title">Rute RASA</h5>
+							<p class="card-text">Cocok untuk kamu yang punya jiwa muda dan berpetualang</p>
+						</div>
+						</a>
+					</div>
+				</div>
+
+				<!--Slide-->
+				<div class="swiper-slide">
+					<div class="card">
+						<a href="rute_sikil.html" class="card" style="text-decoration: none; color: inherit;">
+						<img src="img/SIKIL.png" class="card-img-top">
+						<div class="card-body">
+							<h5 class="card-title">Rute SIKIL</h5>
+							<p class="card-text">Cocok untuk anak-anak yang pengen belajar sejarah di Kotagede</p>
+						</div>
+						</a>
+					</div>
+				</div>
+
+				<!--Slide-->
+				<div class="swiper-slide">
+					<div class="card">
+						<a href="rute_laras.html" class="card" style="text-decoration: none; color: inherit;">
+						<img src="img/LARAS.png" class="card-img-top">
+						<div class="card-body">
+							<h5 class="card-title">Rute LARAS</h5>
+							<p class="card-text">Cocok untuk lansia yang ingin menikmati Kotagede dengan santai</p>
+						</div>
+						</a>
+					</div>
+				</div>
+
+				<!--Slide-->
+				<div class="swiper-slide">
+					<div class="card">
+						<a href="rute_ramah.html" class="card" style="text-decoration: none; color: inherit;">
+						<img src="img/RAMAH.png" class="card-img-top">
+						<div class="card-body">
+							<h5 class="card-title">Rute RAMAH</h5>
+							<p class="card-text">Keliling Kotagede dengan akses yang mudah bagi pengguna kursi roda</p>
+						</div>
+						</a>
+					</div>
+				</div>
+			</div>
+			
+			<!--Navigasi Panah-->
+			<div class="swiper-button-prev"></div>
+			<div class="swiper-button-next"></div>
+		</div>
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script>
+  const swiper = new Swiper('.swiper', {
+	slidesPerView: 1,
+	spaceBetween: 20,
+	navigation: {
+	  nextEl: '.swiper-button-next',
+	  prevEl: '.swiper-button-prev',
+	},
+	breakpoints: {
+	  768: {
+		slidesPerView: 2,
+	  },
+	  992: {
+		slidesPerView: 4,
+	  }
+	}
+  });
+  </script>
+
+	<!-- Footer Area -->
+	<footer id="footer" class="footer ">
+		<!-- Copyright -->
+		<div class="copyright">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12 col-md-12 col-12">
+						<div class="copyright-content">
+							<p>© Copyright 2025 | All Rights Reserved by Teknik Geomatika UPN "Veteran" Yogyakarta</a> </p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--/ End Copyright -->
+	</footer>
+	<!--/ End Footer Area -->
+
+</body>
+
+</html>
