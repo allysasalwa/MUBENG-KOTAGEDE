@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PETA RUTE KOTAGEDE</title>
+
+    <!-- leaflet css -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+    <!--leaflet routing machine css-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+    <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- leaflet js -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="./data/Rute_C.js"></script>
+    <script src="./data/Wisata_C.js"></script>
+
+    <!--leaflet js-->
+    <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- sweetalert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    
+    <!-- CSS -->
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="css/responsive.css">
+</head>
+
+<body>
+    <a href="rute_C.html" target="_blank" id="fullmap-btn">Buka Peta</a>
+    <a href="rute_laras.html" id="back-btn">Kembali ke Beranda</a>
+
+    <div id="map"></div>
+    <div id="mapButtons" style="
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-family: 'Arial', sans-serif;
+">
+        <button class="map-btn" id="goToStartBtn" title="Menuju Titik Awal">
+            <i class="fas fa-map-signs"></i>
+        </button>
+        <button class="map-btn" id="goToMyLocationBtn" title="Lokasi Saya">
+            <i class="fas fa-location-crosshairs"></i>
+        </button>
+        <button class="map-btn" id="resetMapBtn" title="Reset Peta">
+            <i class="fas fa-undo"></i>
+        </button>
+        <button class="map-btn" id="hideRouteBtn" title="Sembunyikan Rute">
+            <i class="fas fa-eye-slash"></i>
+        </button>
+    </div>
+
+
+
+</body>
+
+<script>
+    //Map Initialization
+    var map = L.map('map').setView([-7.83113, 110.39939], 17);
+
+    // Tampilkan tombol kalau halaman sedang dibuka di iframe
+    window.addEventListener('DOMContentLoaded', () => {
+        let isInIframe = false;
+        try {
+            isInIframe = window.self !== window.top;
+        } catch (e) {
+            isInIframe = true;
+        }
+
+        const fullMapBtn = document.getElementById('fullmap-btn');
+        const backBtn = document.getElementById('back-btn');
+
+        if (isInIframe) {
+            fullMapBtn.style.display = 'block'; // tampilkan tombol "Lihat Peta Penuh"
+        } else {
+            backBtn.style.display = 'block'; // tampilkan tombol "Kembali ke Beranda"
+        }
+    });
+
+
+    //osm layer
+    var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    });
+    osm.addTo(map);
+
+    //World Imagery
+    var imagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+        attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+    });
+    //imagery.addTo(map);
+
+    //Google Streets
+    googleStreets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+        maxZoom: 20,
+        subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+    });
+    //googleStreets.addTo(map);
+
+
+    //GEOJSON
+    var rute_C = L.geoJSON(Rute_C, {
+        style: {
+            color: 'red',
+            weight: 4,
+            opacity: 0.8
+        },
+    }).addTo(map);
+
+
+
+    var wisata_C = L.geoJSON(wisata_C, {
+        pointToLayer: function (feature, latlng) {
+            var iconUrl = feature.properties.icon
+                ? './img/' + feature.properties.icon
+                : './img/marker_wisata.png'; // fallback
+
+            var customIcon = L.icon({
+                iconUrl: iconUrl,
+                iconSize: [32, 32],
+                iconAnchor: [16, 32],
+                popupAnchor: [0, -32]
+            });
+
+            return L.marker(latlng, { icon: customIcon });
+        },
+
+        onEachFeature: function (feature, layer) {
+            var name = feature.properties.Name || "Tanpa Nama";
+            var coordinates = feature.geometry.coordinates;
+
+            var link = feature.properties.link || "#";
+
+            var content = `
+            <div style="font-family: 'Georgia', serif; padding: 12px; width: 240px; background-color: #f5f5dc; border: 2px solid #5e3c23; border-radius: 10px; box-shadow: 2px 2px 8px rgba(0,0,0,0.1);">
+                <h3 style="margin-top: 0; font-size: 18px; color: #5e3c23;">${name}</h3>
+                <p style="font-size: 12px; color: #666;">
+                    Koordinat:<br><strong>${coordinates[1].toFixed(5)}, ${coordinates[0].toFixed(5)}</strong>
+                </p>
+                <a href="${link}" target="_blank" style="padding: 6px 10px; background-color: #974824; color: white; border: none; border-radius: 6px; cursor: pointer; text-decoration: none; display: inline-block; margin-top: 8px;">
+                    Selengkapnya
+                </a>
+            </div>
+            `;
+
+
+
+        layer.bindPopup(content);
+        }
+
+    }).addTo(map);
+
+
+    //Layer Controller
+    var baseMaps = {
+        "OSM": osm,
+        "ESRI Imagery": imagery,
+        "Google Street": googleStreets
+    };
+
+    var overlayMaps = {
+        "Rute Wisata": rute_C,
+        "Lokasi Wisata": wisata_C
+
+    };
+    var layerControl = L.control.layers(baseMaps, overlayMaps).addTo(map);
+
+    //Set up geolocatin and routing
+    if (!navigator.geolocation) {
+        console.log("Your browser doesnt support geolocation feature")
+    } else {
+        if (navigator.geolocation) {
+            navigator.geolocation.watchPosition(
+                updateUserLocation,
+                function (error) {
+                    console.warn("Geolocation error:", error.message);
+                },
+                {
+                    enableHighAccuracy: true,
+                    maximumAge: 0,
+                    timeout: 1000
+                }
+            );
+        } else {
+            alert("Browser tidak mendukung geolocation.");
+        }
+
+    }
+
+    var userLocation = null;
+    var destinationCoords = null;
+    var defaultView = map.getCenter();
+    var defaultZoom = map.getZoom();
+    var marker2, circle;
+    var routingControl;
+
+    var hasNotified = false; // Flag untuk notifikasi
+
+    var hasCenteredMap = false; // tambahkan ini di luar function, sebagai flag
+    
+    function updateUserLocation(position) {
+        var lat = position.coords.latitude;
+        var long = position.coords.longitude;
+        var accuracy = position.coords.accuracy;
+
+        // Hapus marker dan circle lama
+        if (marker2) map.removeLayer(marker2);
+        if (circle) map.removeLayer(circle);
+
+        // Custom Icon untuk marker user
+        var userIcon = L.icon({
+            iconUrl: './img/person.png', // pastikan file ini ada
+            iconSize: [36, 36],
+            iconAnchor: [18, 36],
+            popupAnchor: [0, -36]
+        });
+
+        // Tambahkan marker dan akurasi circle
+        marker2 = L.marker([lat, long], { icon: userIcon }).addTo(map);
+        circle = L.circle([lat, long], { radius: accuracy }).addTo(map);
+
+        userLocation = [lat, long];
+        // 🚫 Jangan selalu center, hanya sekali aja
+    if (!hasCenteredMap) {
+        var featureGroup = L.featureGroup([marker2, circle]).addTo(map);
+        map.fitBounds(featureGroup.getBounds());
+        hasCenteredMap = true;
+    }
+
+    console.log("Your coordinate is : Lat:" + lat + " Long:" + long + " Accuracy:" + accuracy);
+
+        // 🚨 Cek apakah user berada dekat dengan start point
+        if (destinationCoords && !hasNotified) {
+            var distance = map.distance([lat, long], destinationCoords);
+            if (distance <= 3000) {
+                hasNotified = true; // Supaya tidak muncul terus
+
+                /// 🔔 Tampilkan notifikasi dengan gambar custom
+                Swal.fire({
+                    title: `<img src="./img/logo_jaghana2.png" alt="Start Icon" width="80" style="margin-bottom: 10px;" /><br><br><span style="color: white;">Anda sudah berada di Start Point!</span>`,
+                    html: `<p style="font-size: 16px; color: white;">Mari mulai tur wisata Kotagede 🧭</p>`,
+                    background: 'url("./img/IMG_1185.jpg") no-repeat center center / cover',
+                    showConfirmButton: true,
+                    confirmButtonColor: '#ffffff',
+                    confirmButtonText: '<span style="color: #974824; font-weight: bold;">Mulai Sekarang</span>',
+                    customClass: {
+                        popup: 'custom-popup-overlay',
+                        title: 'custom-title-overlay',
+                        htmlContainer: 'custom-html-overlay'
+                    },
+                    showClass: {
+                        popup: 'animate__animated animate__fadeInDown'
+                    },
+                    hideClass: {
+                        popup: 'animate__animated animate__fadeOutUp'
+                    }
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire({
+                            title: `<img src="./img/logo_jaghana2.png" alt="Tutorial Icon" width="70" style="margin-bottom: 10px;" /><br><br><span style="color: white;">Tutorial Singkat </span>`,
+                            html: `
+                <div style="text-align: left; font-size: 15px; color: white;">
+                    <ol style="padding-left: 20px;">
+                        <li>Rute berwarna <strong style="color:#ffaaaa;">merah</strong> merupakan rute wisata yang akan kamu lalui.</li>
+                        <li>Marker bernomor adalah tempat wisata yang akan kamu kunjungi.</li>
+                        <li>Nomor pada marker menunjukkan <strong>urutan</strong> kunjungan wisata.</li>
+                    </ol>
+                    <p style="margin-top: 10px; font-weight: bold;">Semangat! Selamat menikmati Kotagede ✨</p>
+                </div>
+            `,
+                            background: 'url("./img/IMG_1185.jpg") no-repeat center center / cover',
+                            confirmButtonColor: '#ffffff',
+                            confirmButtonText: '<span style="color: #974824; font-weight: bold;">Siap, mulai!</span>',
+                            customClass: {
+                                popup: 'custom-popup-overlay',
+                                title: 'custom-title-overlay',
+                                htmlContainer: 'custom-html-overlay'
+                            },
+                            showClass: {
+                                popup: 'animate__animated animate__fadeIn'
+                            },
+                            hideClass: {
+                                popup: 'animate__animated animate__fadeOut'
+                            }
+                        });
+                    }
+                });
+            }
+        }
+    }
+
+
+    //Cari marker ke-2 dari GeoJSON
+    wisata_C.eachLayer(function (layer, index) {
+        if (layer.feature && layer.feature.properties && layer.feature.properties.Name.includes("Situs Watugilang & Watugateng")) {
+            destinationCoords = layer.getLatLng();
+        }
+    });
+
+    // Event tombol
+    document.getElementById("goToStartBtn").addEventListener("click", function () {
+        if (!userLocation) {
+            alert("Lokasi pengguna belum terdeteksi!");
+            return;
+        }
+
+        if (!destinationCoords) {
+            alert("Lokasi tujuan tidak ditemukan.");
+            return;
+        }
+
+        if (routingControl) {
+            map.removeControl(routingControl);
+        }
+
+        routingControl = L.Routing.control({
+            waypoints: [
+                L.latLng(userLocation[0], userLocation[1]),
+                destinationCoords
+            ],
+            routeWhileDragging: false
+        }).addTo(map);
+
+        map.setView(destinationCoords, 16);
+    });
+
+    // GO TO MY LOCATION
+    document.getElementById("goToMyLocationBtn").addEventListener("click", function () {
+        if (userLocation) {
+            map.setView(userLocation, 16);
+        } else {
+            alert("Lokasi pengguna belum tersedia.");
+        }
+    });
+
+    // RESET MAP
+    document.getElementById("resetMapBtn").addEventListener("click", function () {
+        if (routingControl) {
+            map.removeControl(routingControl);
+        }
+        map.setView(defaultView, defaultZoom);
+    });
+
+    //HIDE RUTE
+    document.getElementById("hideRouteBtn").addEventListener("click", function () {
+    if (routingControl) {
+        map.removeControl(routingControl);
+        routingControl = null; // reset supaya bisa dibuat ulang kalau perlu
+    }
+});
+
+</script>
+
+</html>
