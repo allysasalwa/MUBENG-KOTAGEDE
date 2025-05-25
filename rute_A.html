@@ -250,7 +250,7 @@
         // 🚨 Cek apakah user berada dekat dengan start point
         if (destinationCoords && !hasNotified) {
             var distance = map.distance([lat, long], destinationCoords);
-            if (distance <= 3000) {
+            if (distance <= 30) {
                 hasNotified = true; // Supaya tidak muncul terus
 
                 /// 🔔 Tampilkan notifikasi dengan gambar custom
@@ -279,7 +279,7 @@
                             html: `
                 <div style="text-align: left; font-size: 15px; color: white;">
                     <ol style="padding-left: 20px;">
-                        <li>Rute berwarna <strong style="color:#ffaaaa;">merah</strong> merupakan rute wisata yang akan kamu lalui.</li>
+                        <li>Rute berwarna <strong style="color:#914704;">coklat</strong> merupakan rute wisata yang akan kamu lalui.</li>
                         <li>Marker bernomor adalah tempat wisata yang akan kamu kunjungi.</li>
                         <li>Nomor pada marker menunjukkan <strong>urutan</strong> kunjungan wisata.</li>
                     </ol>
